@@ -40,7 +40,7 @@ const verifyUser =(req, res, next) =>{
         return res.status(400).json("Token is missing")
         console.log(token)
     } else {
-        jwt.verify(token, "jwt-secret-key", (err, decoded) =>{
+        jwt.verify(token, process.env.JWT_SECRET_KEY, (err, decoded) =>{
             if(err){
                 return res.status(403).json("Token is not valid!")
             } else {
@@ -82,7 +82,7 @@ app.post('/signin', (req, res) =>{
             bcrypt.compare(password, user.password, (err, response) =>{
                 if(response){
                         const token = jwt.sign({email: user.email},
-                            "jwt-secret-key", {expiresIn: '1d'})
+                            process.env.JWT_SECRET_KEY, {expiresIn: '1d'})
                         res.cookie('token', token)
                         return res.status(200).json({Status: "Success"})
                 }else{
