@@ -36,6 +36,7 @@ mongoose.connect(process.env.MONGODB_URL,{
 
 const verifyUser =(req, res, next) =>{
     const token= req.cookies.token;
+    console.log('Received Token:', token);
     if(!token){
         return res.status(400).json("Token is missing")
         console.log(token)
@@ -83,7 +84,7 @@ app.post('/signin', (req, res) =>{
                 if(response){
                         const token = jwt.sign({email: user.email},
                             process.env.JWT_SECRET_KEY, {expiresIn: '1d'})
-                        res.cookie('token', token)
+                            res.status(200).cookie('token', token)
                         return res.status(200).json({Status: "Success"})
                 }else{
                     return res.status(403).json("The password is incorrect")
