@@ -23,7 +23,7 @@ app.use(cookieParser())
 
 
 /*MONGOOSE SETUP*/
-const PORT = process.env.PORT || 8000;
+const PORT = process.env.PORT || PORT;
 mongoose.connect(process.env.MONGODB_URL,{
     useNewUrlParser: true,
     useUnifiedTopology: true,
