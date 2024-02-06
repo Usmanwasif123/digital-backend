@@ -45,7 +45,7 @@ const SignupUser = async (req, res) =>{
 }
 
 
-//Login Endpoint
+//Signin Endpoint
 const SigninUser = async (req, res) => {
  try{
     const {email, password} = req.body;
@@ -60,10 +60,9 @@ const SigninUser = async (req, res) => {
         //Check if password match
         const match = await comparePassword(password, user.password)
         if(match) {
-            jwt.sign({email: user.email, id: user._id}, process.env.JWT_SECRET_KEY, {}, (err, token) => {
+            jwt.sign({email: user.email, id: user._id}, process.env.JWT_SECRET_KEY, {expiresIn: '1h'}, (err, token) => {
                 if(err) throw err;
-                res.cookie('token', token).json(user)
-
+                res.cookie('token', token).json({ user, message: 'User signed in successfully' })
             })
         }
         if(!match) {

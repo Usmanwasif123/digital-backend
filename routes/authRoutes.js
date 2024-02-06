@@ -15,4 +15,4 @@ router.get('/', test)
 router.post('/signup', SignupUser)
 router.post('/signin', SigninUser)
 router.get("/device", getProfile)
-module.exports =router
+module.exports = router
