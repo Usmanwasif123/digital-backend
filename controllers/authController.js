@@ -2,6 +2,7 @@ const UserModel = require('../models/user')
 const { hashPassword, comparePassword } = require('../helpers/auth')
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt')
+const ActivityModel = require('../models/Activity')
 
 const test = (req, res) => {
     res.json('test is working')
@@ -103,6 +104,20 @@ const getAdminProfile = (req, res) => {
         res.json(null);
     }
 }
+const getUserDetails = async (req, res) => {
+    const userId = req.params.userId;
+    // Fetch user details from the database
+    const user = await UserModel.find();
+    res.json(user);
+};
+
+const getUserActivities = async (req, res) => {
+    const userId = req.params.userId;
+    // Fetch user activities from the database
+    const activities = await ActivityModel.find();
+    res.json(activities);
+}
+
 
 module.exports = {
     test,
@@ -110,5 +125,7 @@ module.exports = {
     SigninUser,
     getProfile,
     getAdminProfile,
-    adminSignIn // Add adminSignIn here
+    adminSignIn, // Add adminSignIn herey
+    getUserDetails,
+    getUserActivities,
 }
