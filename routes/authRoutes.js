@@ -7,11 +7,11 @@ const {test, SignupUser, SigninUser, getProfile, adminSignIn, getAdminProfile, g
 router.use(
     cors({
         credentials: true,
-        origin: "http://localhost:3000"
+        origin: process.env.origin
     })
 )
 
-router.get('/', test)
+router.get('/test', test)
 router.post('/signup', SignupUser)
 router.post('/signin', SigninUser)
 router.get("/device", getProfile)
