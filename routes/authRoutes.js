@@ -7,7 +7,7 @@ const {test, SignupUser, SigninUser, getProfile, adminSignIn, getAdminProfile, g
 router.use(
     cors({
         credentials: true,
-        origin: process.env.origin
+        origin: process.env.backend_origin
     })
 )
 
